@@ -44,6 +44,7 @@ void loop()
 void handle404()
 {
   webServer.send(404, "text/plain", "404 Not Found");
+  flashLed();
 }
 
 void handlePressure()
@@ -51,6 +52,7 @@ void handlePressure()
   float pressure = bme280.readPressure() / 100;
 
   webServer.send(200, "text/plain", String(pressure));
+  flashLed();
 }
 
 void handleHumidity()
@@ -58,6 +60,7 @@ void handleHumidity()
   float humidity = readHumidity();
 
   webServer.send(200, "text/plain", String(humidity));
+  flashLed();
 }
 
 void handleTemperature()
@@ -65,6 +68,7 @@ void handleTemperature()
   float temperature = readTemperature();
 
   webServer.send(200, "text/plain", String(temperature));
+  flashLed();
 }
 
 void handleIlluminanceIr()
@@ -72,6 +76,7 @@ void handleIlluminanceIr()
   unsigned int illuminance = tsl2561.getLuminosity(TSL2561_INFRARED);
 
   webServer.send(200, "text/plain", String(illuminance));
+  flashLed();
 }
 
 void handleIlluminanceVisible()
@@ -79,6 +84,7 @@ void handleIlluminanceVisible()
   unsigned int illuminance = tsl2561.getLuminosity(TSL2561_VISIBLE);
 
   webServer.send(200, "text/plain", String(illuminance));
+  flashLed();
 }
 
 void handleIlluminanceFull()
@@ -86,6 +92,7 @@ void handleIlluminanceFull()
   unsigned int illuminance = tsl2561.getLuminosity(TSL2561_FULLSPECTRUM);
 
   webServer.send(200, "text/plain", String(illuminance));
+  flashLed();
 }
 
 bool isLedEnabled = true;
@@ -96,6 +103,7 @@ void handleLed()
   }
 
   webServer.send(204);
+  flashLed();
 }
 
 void handleRoot()
@@ -129,7 +137,6 @@ void handleRoot()
   response += "}";
 
   webServer.send(200, "application/json", response);
-
   flashLed();
 }
 
